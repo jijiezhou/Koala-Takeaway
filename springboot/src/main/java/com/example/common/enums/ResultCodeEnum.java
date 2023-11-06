@@ -6,10 +6,10 @@ public enum ResultCodeEnum {
     PARAM_ERROR("400", "参数异常"),
     TOKEN_INVALID_ERROR("401", "无效的token"),
     TOKEN_CHECK_ERROR("401", "token验证失败，请重新登录"),
-    PARAM_LOST_ERROR("4001", "参数缺失"),
+    PARAM_LOST_ERROR("4001", "params lost error"),
 
     SYSTEM_ERROR("500", "系统异常"),
-    USER_EXIST_ERROR("5001", "用户名已存在"),
+    USER_EXIST_ERROR("5001", "username already exist"),
     USER_NOT_LOGIN("5002", "用户未登录"),
     USER_ACCOUNT_ERROR("5003", "账号或密码错误"),
     USER_NOT_EXIST_ERROR("5004", "用户不存在"),

@@ -11,7 +11,7 @@ import java.util.List;
  * @Date 11/5/23 7:38PM
  */
 public interface BusinessMapper {
-    List<Business> selectAll();
+    List<Business> selectAll(Business business);
 
-    void insert(Business business);
+    int insert(Business business);
 }

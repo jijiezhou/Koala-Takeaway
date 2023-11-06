@@ -18,7 +18,7 @@
             <if test="address != null">address,</if>
             <if test="license != null">license,</if>
             <if test="status != null">status,</if>
-            <if test="time_range != null">time_range,</if>
+            <if test="timeRange != null">time_range,</if>
             <if test="type != null">type,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -33,12 +33,21 @@
             <if test="address != null">#{address},</if>
             <if test="license != null">#{license},</if>
             <if test="status != null">#{status},</if>
-            <if test="time_range != null">#{time_range},</if>
+            <if test="timeRange != null">#{timeRange},</if>
             <if test="type != null">#{type},</if>
         </trim>
     </insert>
 
-    <select id="selectAll" resultType="com.example.entity.Business">
-        select * from business order by id desc
+    <select id="selectAll" parameterType="com.example.entity.Business" resultType="com.example.entity.Business">
+        select * from business
+            <where>
+                <if test="id != null">
+                    and id = #{id}
+                </if>
+                <if test="username != null">
+                    and username = #{username}
+                </if>
+            </where>
+        order by id desc
     </select>
 </mapper>

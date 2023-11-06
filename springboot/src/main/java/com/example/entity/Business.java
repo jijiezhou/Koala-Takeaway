@@ -20,7 +20,7 @@ public class Business {
     private String address;
     private String license;
     private String status;
-    private String time_range;
+    private String timeRange;
     private String type;
 
     public Integer getId() {
@@ -111,12 +111,12 @@ public class Business {
         this.status = status;
     }
 
-    public String getTime_range() {
-        return time_range;
+    public String getTimeRange() {
+        return timeRange;
     }
 
-    public void setTime_range(String time_range) {
-        this.time_range = time_range;
+    public void setTimeRange(String timeRange) {
+        this.timeRange = timeRange;
     }
 
     public String getType() {
