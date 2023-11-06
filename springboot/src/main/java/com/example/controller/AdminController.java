@@ -5,6 +5,7 @@ import com.example.entity.Admin;
 import com.example.service.AdminService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -67,7 +68,7 @@ public class AdminController {
      * 查询所有
      */
     @GetMapping("/selectAll")
-    public Result selectAll(Admin admin ) {
+    public Result selectAll(Admin admin) {
         List<Admin> list = adminService.selectAll(admin);
         return Result.success(list);
     }
@@ -82,5 +83,4 @@ public class AdminController {
         PageInfo<Admin> page = adminService.selectPage(admin, pageNum, pageSize);
         return Result.success(page);
     }
-
 }

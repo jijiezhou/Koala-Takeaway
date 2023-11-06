@@ -82,19 +82,24 @@
     </update>
 
     <delete id="deleteById">
-        delete from business where id = #{id}
+        delete
+        from business
+        where id = #{id}
     </delete>
 
     <select id="selectAll" parameterType="com.example.entity.Business" resultType="com.example.entity.Business">
         select * from business
-            <where>
-                <if test="id != null">
-                    and id = #{id}
-                </if>
-                <if test="username != null">
-                    and username = #{username}
-                </if>
-            </where>
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="username != null">
+                and username = #{username}
+            </if>
+            <if test="name != null">
+                and name like concat('%', #{name}, '%')
+            </if>
+        </where>
         order by id desc
     </select>
 </mapper>
