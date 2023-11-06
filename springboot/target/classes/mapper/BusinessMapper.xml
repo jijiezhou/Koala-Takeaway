@@ -81,6 +81,10 @@
         where id = #{id}
     </update>
 
+    <delete id="deleteById">
+        delete from business where id = #{id}
+    </delete>
+
     <select id="selectAll" parameterType="com.example.entity.Business" resultType="com.example.entity.Business">
         select * from business
             <where>

@@ -38,27 +38,7 @@ public class BusinessService {
         businessMapper.insert(business);
     }
 
-    /**
-     * Get Business By username
-     * return: at most one Business
-     */
-    public Business selectByUsername(String username){
-        Business params = new Business();
-        params.setUsername(username);
-        List<Business> list = this.selectAll(params);
-        return list.size() == 0 ? null : list.get(0);
-    }
 
-    /**
-     * Get Business By id
-     * return: at most one Business
-     */
-    public Business selectById(Integer id){
-        Business params = new Business();
-        params.setId(id);
-        List<Business> list = this.selectAll(params);
-        return list.size() == 0 ? null : list.get(0);
-    }
 
     /**
      * Update business service
@@ -80,6 +60,24 @@ public class BusinessService {
     }
 
     /**
+     * Delete By Id
+     * @param id
+     */
+    public void deleteById(Integer id) {
+        businessMapper.deleteById(id);
+    }
+
+    /**
+     * Delete Batch
+     * @param ids
+     */
+    public void deleteBatch(List<Integer> ids) {
+        for (Integer id: ids){
+            deleteById(id);
+        }
+    }
+
+    /**
      * Select All business service
      * @param business
      * @return
@@ -88,6 +86,25 @@ public class BusinessService {
         return businessMapper.selectAll(business);
     }
 
+    /**
+     * Get Business By username
+     * return: at most one Business
+     */
+    public Business selectByUsername(String username){
+        Business params = new Business();
+        params.setUsername(username);
+        List<Business> list = this.selectAll(params);
+        return list.size() == 0 ? null : list.get(0);
+    }
 
-
+    /**
+     * Get Business By id
+     * return: at most one Business
+     */
+    public Business selectById(Integer id){
+        Business params = new Business();
+        params.setId(id);
+        List<Business> list = this.selectAll(params);
+        return list.size() == 0 ? null : list.get(0);
+    }
 }

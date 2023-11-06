@@ -38,6 +38,33 @@ public class BusinessController {
         return Result.success();
     }
 
+    /**
+     * Delete Business
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/delete/{id}")
+    public Result delete(@PathVariable Integer id){
+        businessService.deleteById(id);
+        return Result.success();
+    }
+
+    /**
+     * DeleteBatch
+     * @param ids
+     * @return
+     */
+    @DeleteMapping("/delete/batch")
+    public Result deleteBatch(@RequestBody List<Integer> ids){
+        businessService.deleteBatch(ids);
+        return Result.success();
+    }
+
+    /**
+     * Update Business
+     * @param business
+     * @return
+     */
     @PutMapping("/update")
     public Result update(@RequestBody Business business){
         businessService.updateById(business);
@@ -53,5 +80,11 @@ public class BusinessController {
     public Result selectAll(Business business){
         List<Business> list = businessService.selectAll(business);
         return Result.success(list);
+    }
+
+    @GetMapping("/select/{id}")
+    public Result selectById(@PathVariable Integer id){
+        Business business1 = businessService.selectById(id);
+        return Result.success(business1);
     }
 }
