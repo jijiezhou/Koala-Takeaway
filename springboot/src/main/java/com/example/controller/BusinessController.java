@@ -1,12 +1,12 @@
 package com.example.controller;
 
 import com.example.common.Result;
+import com.example.entity.Business;
 import com.example.service.BusinessService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Classname BusinessController
@@ -20,9 +20,14 @@ public class BusinessController {
     @Resource
     private BusinessService businessService;
 
+    @PostMapping("/add")
+    public Result add(@RequestBody Business business){
+        businessService.add(business);
+        return Result.success();
+    }
     @GetMapping("/selectAll")
     public Result selectAll(){
-        String result = businessService.selectAll();
-        return Result.success(result);
+        List<Business> list = businessService.selectAll();
+        return Result.success(list);
     }
 }
