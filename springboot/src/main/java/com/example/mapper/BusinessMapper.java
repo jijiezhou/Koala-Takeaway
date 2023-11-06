@@ -14,4 +14,6 @@ public interface BusinessMapper {
     List<Business> selectAll(Business business);
 
     int insert(Business business);
+
+    int updateById(Business business);
 }

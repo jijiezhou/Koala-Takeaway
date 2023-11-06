@@ -23,6 +23,11 @@ public class BusinessController {
     @Resource
     private BusinessService businessService;
 
+    /**
+     * Add Business
+     * @param business
+     * @return
+     */
     @PostMapping("/add")
     public Result add(@RequestBody Business business){
         //check if username and password empty
@@ -32,6 +37,18 @@ public class BusinessController {
         businessService.add(business);
         return Result.success();
     }
+
+    @PutMapping("/update")
+    public Result update(@RequestBody Business business){
+        businessService.updateById(business);
+        return Result.success();
+    }
+
+    /**
+     * Select All Business
+     * @param business
+     * @return
+     */
     @GetMapping("/selectAll")
     public Result selectAll(Business business){
         List<Business> list = businessService.selectAll(business);
