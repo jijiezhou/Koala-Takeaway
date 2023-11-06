@@ -82,9 +82,9 @@ public class BusinessController {
         return Result.success(list);
     }
 
-    @GetMapping("/select/{id}")
+    @GetMapping("/selectById/{id}")
     public Result selectById(@PathVariable Integer id){
-        Business business1 = businessService.selectById(id);
-        return Result.success(business1);
+        Business business = businessService.selectById(id);
+        return Result.success(business);
     }
 }
