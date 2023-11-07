@@ -6,4 +6,7 @@ public enum RoleEnum {
 
     // business
     BUSINESS,
+
+    //user
+    USER
 }
