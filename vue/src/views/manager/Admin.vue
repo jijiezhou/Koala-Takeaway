@@ -68,6 +68,7 @@
               class="avatar-uploader"
               :action="$baseUrl + '/files/upload'"
               :headers="{ token: user.token }"
+              :file-list="form.avatar ? [form.avatar] : []"
               list-type="picture"
               :on-success="handleAvatarSuccess"
           >

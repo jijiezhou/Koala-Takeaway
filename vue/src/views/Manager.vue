@@ -47,14 +47,15 @@
 
           <el-submenu index="user">
             <template slot="title">
-              <i class="el-icon-menu"></i><span>用户管理</span>
+              <i class="el-icon-menu"></i><span>User Management</span>
             </template>
-            <el-menu-item index="/admin">管理员信息</el-menu-item>
+            <el-menu-item index="/admin">Admin Info</el-menu-item>
+            <el-menu-item index="/business">Business Info</el-menu-item>
           </el-submenu>
         </el-menu>
       </div>
 
-      <!--  数据表格  -->
+      <!--  Data Table  -->
       <div class="manager-main-right">
         <router-view @update:user="updateUser" />
       </div>
