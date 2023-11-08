@@ -5,7 +5,7 @@ package com.example.entity;
  */
 public class Account {
     private Integer id;
-    /** 用户名 */
+    /** username */
     private String username;
     /** 名称 */
     private String name;

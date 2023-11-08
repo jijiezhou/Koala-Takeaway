@@ -51,9 +51,11 @@ public class WebController {
                 || ObjectUtil.isEmpty(account.getRole())) {
             return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
         }
+        //if Admin
         if (RoleEnum.ADMIN.name().equals(account.getRole())) {
             adminService.register(account);
         }
+        //if Business
         return Result.success();
     }
 
