@@ -51,6 +51,8 @@
             </template>
             <el-menu-item index="/admin">Admin Info</el-menu-item>
             <el-menu-item index="/business">Business Info</el-menu-item>
+            <el-menu-item index="/user">User Info</el-menu-item>
+
           </el-submenu>
         </el-menu>
       </div>
