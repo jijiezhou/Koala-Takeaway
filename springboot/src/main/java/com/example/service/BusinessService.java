@@ -6,6 +6,7 @@ import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
 import com.example.entity.Business;
 import com.example.entity.Business;
+import com.example.entity.Business;
 import com.example.exception.CustomException;
 import com.example.mapper.BusinessMapper;
 import com.example.utils.TokenUtils;
@@ -164,5 +165,23 @@ public class BusinessService {
         String token = TokenUtils.createToken(tokenData, dbBusiness.getPassword());
         dbBusiness.setToken(token);
         return dbBusiness;
+    }
+
+    /**
+     * change password
+     * @param account
+     */
+    public void updatePassword(Account account) {
+        Business dbBusiness = this.selectByUsername(account.getUsername());
+        //user not exist
+        if (ObjectUtil.isNull(dbBusiness)) {
+            throw new CustomException(ResultCodeEnum.USER_NOT_EXIST_ERROR);
+        }
+        //password inconsistent
+        if (!account.getPassword().equals(dbBusiness.getPassword())) {
+            throw new CustomException(ResultCodeEnum.PARAM_PASSWORD_ERROR);
+        }
+        dbBusiness.setPassword(account.getNewPassword());
+        businessMapper.updateById(dbBusiness);
     }
 }

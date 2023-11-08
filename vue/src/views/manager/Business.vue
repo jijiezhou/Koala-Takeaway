@@ -38,7 +38,13 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="status" label="status"></el-table-column>
+        <el-table-column prop="status" label="status">
+          <template v-slot="scope">
+            <el-tag type="info" v-if="scope.row.status === 'pending'">pending</el-tag>
+            <el-tag type="success" v-if="scope.row.status === 'pass'">pass</el-tag>
+            <el-tag type="dangerous" v-if="scope.row.status === 'reject'">reject</el-tag>
+          </template>
+        </el-table-column>
         <el-table-column prop="timeRange" label="time range"></el-table-column>
         <el-table-column prop="type" label="type"></el-table-column>
 

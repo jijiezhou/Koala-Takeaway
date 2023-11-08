@@ -69,16 +69,20 @@ public class WebController {
     }
 
     /**
-     * 修改密码
+     * change password
      */
     @PutMapping("/updatePassword")
     public Result updatePassword(@RequestBody Account account) {
+        //check param lost
         if (StrUtil.isBlank(account.getUsername()) || StrUtil.isBlank(account.getPassword())
                 || ObjectUtil.isEmpty(account.getNewPassword())) {
             return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
         }
+        //if admin
         if (RoleEnum.ADMIN.name().equals(account.getRole())) {
             adminService.updatePassword(account);
+        }else if (RoleEnum.BUSINESS.name().equals(account.getRole())) {
+            businessService.updatePassword(account);
         }
         return Result.success();
     }
