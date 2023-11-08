@@ -13,20 +13,20 @@
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </div>
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="user.username" placeholder="用户名" disabled></el-input>
+        <el-form-item label="username" prop="username">
+          <el-input v-model="user.username" placeholder="username" disabled></el-input>
         </el-form-item>
-        <el-form-item label="姓名" prop="name">
-          <el-input v-model="user.name" placeholder="姓名"></el-input>
+        <el-form-item label="name" prop="name">
+          <el-input v-model="user.name" placeholder="name"></el-input>
         </el-form-item>
-        <el-form-item label="电话" prop="phone">
-          <el-input v-model="user.phone" placeholder="电话"></el-input>
+        <el-form-item label="phone" prop="phone">
+          <el-input v-model="user.phone" placeholder="phone"></el-input>
         </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-input v-model="user.email" placeholder="邮箱"></el-input>
+        <el-form-item label="email" prop="email">
+          <el-input v-model="user.email" placeholder="email"></el-input>
         </el-form-item>
         <div style="text-align: center; margin-bottom: 20px">
-          <el-button type="primary" @click="update">保 存</el-button>
+          <el-button type="primary" @click="update">Save</el-button>
         </div>
       </el-form>
     </el-card>
@@ -46,16 +46,16 @@ export default {
   },
   methods: {
     update() {
-      // 保存当前的用户信息到数据库
+      // Save current user information to database
       this.$request.put('/admin/update', this.user).then(res => {
         if (res.code === '200') {
-          // 成功更新
-          this.$message.success('保存成功')
+          // update success
+          this.$message.success('update success')
 
-          // 更新浏览器缓存里的用户信息
+          // Update user information in browser cache
           localStorage.setItem('xm-user', JSON.stringify(this.user))
 
-          // 触发父级的数据更新
+          //Trigger data update of parent
           this.$emit('update:user')
         } else {
           this.$message.error(res.msg)
@@ -63,7 +63,7 @@ export default {
       })
     },
     handleAvatarSuccess(response, file, fileList) {
-      // 把user的头像属性换成上传的图片的链接
+      // Replace the user's avatar attribute with the link to the uploaded image
       this.$set(this.user, 'avatar', response.data)
     },
   }

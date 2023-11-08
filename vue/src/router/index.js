@@ -16,13 +16,14 @@ const routes = [
     component: () => import('../views/Manager.vue'),
     redirect: '/home',  // 重定向到主页
     children: [
-      { path: '403', name: 'NoAuth', meta: { name: '无权限' }, component: () => import('../views/manager/403') },
-      { path: 'home', name: 'Home', meta: { name: '系统首页' }, component: () => import('../views/manager/Home') },
-      { path: 'admin', name: 'Admin', meta: { name: '管理员信息' }, component: () => import('../views/manager/Admin') },
-      { path: 'adminPerson', name: 'AdminPerson', meta: { name: '个人信息' }, component: () => import('../views/manager/AdminPerson') },
-      { path: 'password', name: 'Password', meta: { name: '修改密码' }, component: () => import('../views/manager/Password') },
-      { path: 'notice', name: 'Notice', meta: { name: '公告信息' }, component: () => import('../views/manager/Notice') },
+      { path: '403', name: 'NoAuth', meta: { name: 'No Authentication' }, component: () => import('../views/manager/403') },
+      { path: 'home', name: 'Home', meta: { name: 'Home Page' }, component: () => import('../views/manager/Home') },
+      { path: 'admin', name: 'Admin', meta: { name: 'Admin Info' }, component: () => import('../views/manager/Admin') },
+      { path: 'adminPerson', name: 'AdminPerson', meta: { name: 'Admin Personal Info' }, component: () => import('../views/manager/AdminPerson') },
+      { path: 'password', name: 'Password', meta: { name: 'Change Password' }, component: () => import('../views/manager/Password') },
+      { path: 'notice', name: 'Notice', meta: { name: 'Notice Info' }, component: () => import('../views/manager/Notice') },
       { path: 'business', name: 'Business', meta: { name: 'Business Info' }, component: () => import('../views/manager/Business') },
+      { path: 'businessPerson', name: 'BusinessPerson', meta: { name: 'Business Personal Info' }, component: () => import('../views/manager/BusinessPerson') },
       { path: 'user', name: 'User', meta: { name: 'User Info' }, component: () => import('../views/manager/User') },
     ]
   },
