@@ -6,7 +6,7 @@ package com.example.entity;
  * @Author zjj
  * @Date 11/5/23 7:30PM
  */
-public class Business {
+public class Business extends Account{
     private Integer id;
     private String username;
     private String password;

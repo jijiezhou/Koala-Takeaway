@@ -3,11 +3,15 @@ package com.example.service;
 import cn.hutool.core.util.ObjectUtil;
 import com.example.common.enums.ResultCodeEnum;
 import com.example.common.enums.RoleEnum;
+import com.example.entity.Account;
+import com.example.entity.Business;
 import com.example.entity.Business;
 import com.example.exception.CustomException;
 import com.example.mapper.BusinessMapper;
+import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -124,5 +128,41 @@ public class BusinessService {
         PageHelper.startPage(pageNum, pageSize);
         List<Business> list = businessMapper.selectAll(business);
         return PageInfo.of(list);
+    }
+
+    /**
+     * Register
+     * @param account
+     */
+    public void register(Account account) {
+        Business business = new Business();
+        BeanUtils.copyProperties(account, business);
+        //set default name = username
+        if(ObjectUtil.isEmpty(business.getName())){
+            business.setName(business.getUsername());
+        }
+        add(business);
+    }
+
+    /**
+     * Login
+     * @param account
+     * @return
+     */
+    public Account login(Account account) {
+        Business dbBusiness = this.selectByUsername(account.getUsername());
+        //database do not have this user
+        if (ObjectUtil.isNull(dbBusiness)) {
+            throw new CustomException(ResultCodeEnum.USER_NOT_EXIST_ERROR);
+        }
+        //password isn't correct
+        if (!account.getPassword().equals(dbBusiness.getPassword())) {
+            throw new CustomException(ResultCodeEnum.USER_ACCOUNT_ERROR);
+        }
+        // create token(id + role, password)
+        String tokenData = dbBusiness.getId() + "-" + RoleEnum.BUSINESS.name();
+        String token = TokenUtils.createToken(tokenData, dbBusiness.getPassword());
+        dbBusiness.setToken(token);
+        return dbBusiness;
     }
 }

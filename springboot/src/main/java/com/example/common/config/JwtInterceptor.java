@@ -11,6 +11,7 @@ import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
 import com.example.exception.CustomException;
 import com.example.service.AdminService;
+import com.example.service.BusinessService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -31,6 +32,9 @@ public class JwtInterceptor implements HandlerInterceptor {
     @Resource
     private AdminService adminService;
 
+    @Resource
+    private BusinessService businessService;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         // 1. Get the token from the header of the http request
@@ -46,13 +50,16 @@ public class JwtInterceptor implements HandlerInterceptor {
 
         Account account = null;
         try {
-            // 解析token获取存储的数据
+            // Parse token to obtain stored data
             String userRole = JWT.decode(token).getAudience().get(0);
             String userId = userRole.split("-")[0];
             String role = userRole.split("-")[1];
-            // 根据userId查询数据库
+
+            //Query the database based on userId
             if (RoleEnum.ADMIN.name().equals(role)) {
                 account = adminService.selectById(Integer.valueOf(userId));
+            } else if (RoleEnum.BUSINESS.name().equals(role)) {
+                account = businessService.selectById(Integer.valueOf(userId));
             }
         } catch (Exception e) {
             throw new CustomException(ResultCodeEnum.TOKEN_CHECK_ERROR);

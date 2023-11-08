@@ -3,26 +3,26 @@ package com.example.entity;
 import java.io.Serializable;
 
 /**
- * 管理员
+ * Admin
 */
 public class Admin extends Account implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** ID */
     private Integer id;
-    /** 用户名 */
+    /** username */
     private String username;
-    /** 密码 */
+    /** password */
     private String password;
-    /** 姓名 */
+    /** name */
     private String name;
-    /** 电话 */
+    /** phone */
     private String phone;
-    /** 邮箱 */
+    /** email */
     private String email;
-    /** 头像 */
+    /** avatar */
     private String avatar;
-    /** 角色标识 */
+    /** role */
     private String role;
 
     @Override

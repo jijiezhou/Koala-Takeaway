@@ -103,7 +103,6 @@ public class AdminService {
         if (!account.getPassword().equals(dbAdmin.getPassword())) {
             throw new CustomException(ResultCodeEnum.USER_ACCOUNT_ERROR);
         }
-        // create token(id + role, password)
         String tokenData = dbAdmin.getId() + "-" + RoleEnum.ADMIN.name();
         String token = TokenUtils.createToken(tokenData, dbAdmin.getPassword());
         dbAdmin.setToken(token);
@@ -111,7 +110,7 @@ public class AdminService {
     }
 
     /**
-     * 注册
+     * Register
      */
     public void register(Account account) {
         Admin admin = new Admin();

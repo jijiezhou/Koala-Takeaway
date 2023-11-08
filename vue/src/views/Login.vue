@@ -9,6 +9,12 @@
         <el-form-item prop="password">
           <el-input prefix-icon="el-icon-lock" placeholder="please enter password" show-password  v-model="form.password"></el-input>
         </el-form-item>
+        <el-form-item prop="role">
+          <el-radio-group v-model="form.role">
+            <el-radio label="ADMIN">ADMIN</el-radio>
+            <el-radio label="BUSINESS">BUSINESS</el-radio>
+          </el-radio-group>
+        </el-form-item>
         <el-form-item>
           <el-button style="width: 100%; background-color: #333; border-color: #333; color: white" @click="login">Login</el-button>
         </el-form-item>

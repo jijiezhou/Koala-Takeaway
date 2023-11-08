@@ -7,15 +7,15 @@ public class Account {
     private Integer id;
     /** username */
     private String username;
-    /** 名称 */
+    /** name */
     private String name;
-    /** 密码 */
+    /** password */
     private String password;
-    /** 角色标识 */
+    /** role */
     private String role;
-    /** 新密码 */
+    /** newPassword */
     private String newPassword;
-    /** 头像 */
+    /** avatar */
     private String avatar;
 
     private String token;
