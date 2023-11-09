@@ -1,8 +1,11 @@
 package com.example.service;
 
+import com.example.common.enums.RoleEnum;
+import com.example.entity.Account;
 import com.example.entity.Business;
 import com.example.entity.Category;
 import com.example.mapper.CategoryMapper;
+import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
@@ -40,6 +43,12 @@ public class CategoryService {
     }
 
     public List<Category> selectAll(Category category) {
+        //get current login user
+        Account currentUser = TokenUtils.getCurrentUser();
+        //check is user is business, then it can only select its info
+        if (RoleEnum.BUSINESS.equals(currentUser.getRole())){
+            category.setBusinessId(currentUser.getId());
+        }
         return categoryMapper.selectAll(category);
     }
 
@@ -49,6 +58,12 @@ public class CategoryService {
 
     public PageInfo<Category> selectPage(Category category, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
+        //get current login user
+        Account currentUser = TokenUtils.getCurrentUser();
+        //check is user is business, then it can only select its info
+        if (RoleEnum.BUSINESS.equals(currentUser.getRole())){
+            category.setBusinessId(currentUser.getId());
+        }
         List<Category> list = categoryMapper.selectAll(category);
         return PageInfo.of(list);
     }

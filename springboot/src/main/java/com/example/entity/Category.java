@@ -18,7 +18,7 @@ public class Category {
     /**
      * businessId
      */
-    private String businessId;
+    private Integer businessId;
 
     private String businessName;
 
@@ -46,11 +46,11 @@ public class Category {
         this.name = name;
     }
 
-    public String getBusinessId() {
+    public Integer getBusinessId() {
         return businessId;
     }
 
-    public void setBusinessId(String businessId) {
+    public void setBusinessId(Integer businessId) {
         this.businessId = businessId;
     }
 }
