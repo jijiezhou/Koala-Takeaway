@@ -45,8 +45,9 @@ public class CategoryService {
     public List<Category> selectAll(Category category) {
         //get current login user
         Account currentUser = TokenUtils.getCurrentUser();
+        String role = currentUser.getRole();
         //check is user is business, then it can only select its info
-        if (RoleEnum.BUSINESS.equals(currentUser.getRole())){
+        if (role.equals(RoleEnum.BUSINESS.name())){
             category.setBusinessId(currentUser.getId());
         }
         return categoryMapper.selectAll(category);
@@ -60,8 +61,9 @@ public class CategoryService {
         PageHelper.startPage(pageNum, pageSize);
         //get current login user
         Account currentUser = TokenUtils.getCurrentUser();
+        String role = currentUser.getRole();
         //check is user is business, then it can only select its info
-        if (RoleEnum.BUSINESS.equals(currentUser.getRole())){
+        if (role.equals(RoleEnum.BUSINESS.name())){
             category.setBusinessId(currentUser.getId());
         }
         List<Category> list = categoryMapper.selectAll(category);

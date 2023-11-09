@@ -8,6 +8,7 @@ import com.example.common.Constants;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
 import com.example.service.AdminService;
+import com.example.service.BusinessService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -28,17 +29,22 @@ public class TokenUtils {
     private static final Logger log = LoggerFactory.getLogger(TokenUtils.class);
 
     private static AdminService staticAdminService;
+    private static BusinessService staticBusinessService;
 
     @Resource
     AdminService adminService;
 
+    @Resource
+    BusinessService businessService;
+
     @PostConstruct
     public void setUserService() {
         staticAdminService = adminService;
+        staticBusinessService = businessService;
     }
 
     /**
-     * 生成token
+     * create token
      */
     public static String createToken(String data, String sign) {
         return JWT.create().withAudience(data) // 将 userId-role 保存到 token 里面,作为载荷
@@ -47,7 +53,7 @@ public class TokenUtils {
     }
 
     /**
-     * 获取当前登录的用户信息
+     * Get current login user info
      */
     public static Account getCurrentUser() {
         try {
@@ -55,16 +61,20 @@ public class TokenUtils {
             String token = request.getHeader(Constants.TOKEN);
             if (ObjectUtil.isNotEmpty(token)) {
                 String userRole = JWT.decode(token).getAudience().get(0);
-                String userId = userRole.split("-")[0];  // 获取用户id
-                String role = userRole.split("-")[1];    // 获取角色
+                String userId = userRole.split("-")[0];  // get user id
+                String role = userRole.split("-")[1];    // get user role
+                //ADMIN
                 if (RoleEnum.ADMIN.name().equals(role)) {
                     return staticAdminService.selectById(Integer.valueOf(userId));
+                }else if (RoleEnum.BUSINESS.name().equals(role)) {
+                    //BUSINESS
+                    return staticBusinessService.selectById(Integer.valueOf(userId));
                 }
             }
         } catch (Exception e) {
-            log.error("获取当前用户信息出错", e);
+            log.error("select current user error", e);
         }
-        return new Account();  // 返回空的账号对象
+        return new Account();  // return empty account
     }
 }
 
