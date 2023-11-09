@@ -14,6 +14,7 @@ import java.util.List;
 public interface CategoryMapper {
     /**
      * Insert
+     *
      * @param category
      * @return
      */
@@ -21,6 +22,7 @@ public interface CategoryMapper {
 
     /**
      * Delete
+     *
      * @param id
      * @return
      */
@@ -28,6 +30,7 @@ public interface CategoryMapper {
 
     /**
      * update
+     *
      * @param category
      * @return
      */
@@ -35,6 +38,7 @@ public interface CategoryMapper {
 
     /**
      * select by id
+     *
      * @param id
      * @return
      */
@@ -42,9 +46,9 @@ public interface CategoryMapper {
 
     /**
      * selectAll
+     *
      * @param category
      * @return
      */
     List<Category> selectAll(Category category);
-
 }

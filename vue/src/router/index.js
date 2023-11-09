@@ -25,6 +25,7 @@ const routes = [
       { path: 'business', name: 'Business', meta: { name: 'Business Info' }, component: () => import('../views/manager/Business') },
       { path: 'businessPerson', name: 'BusinessPerson', meta: { name: 'Business Personal Info' }, component: () => import('../views/manager/BusinessPerson') },
       { path: 'user', name: 'User', meta: { name: 'User Info' }, component: () => import('../views/manager/User') },
+      { path: 'category', name: 'Category', meta: { name: 'Category Info' }, component: () => import('../views/manager/Category') },
     ]
   },
   {

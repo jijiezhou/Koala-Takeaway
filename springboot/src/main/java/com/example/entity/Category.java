@@ -20,6 +20,16 @@ public class Category {
      */
     private String businessId;
 
+    private String businessName;
+
+    public String getBusinessName() {
+        return businessName;
+    }
+
+    public void setBusinessName(String businessName) {
+        this.businessName = businessName;
+    }
+
     public Integer getId() {
         return id;
     }

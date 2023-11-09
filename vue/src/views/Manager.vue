@@ -43,6 +43,7 @@
               <i class="el-icon-menu"></i><span>Info Management</span>
             </template>
             <el-menu-item index="/notice" v-if="user.role === 'ADMIN'">Notice Information</el-menu-item>
+            <el-menu-item index="/category">Category Information</el-menu-item>
           </el-submenu>
 
           <el-submenu index="user" v-if="user.role === 'ADMIN'">
