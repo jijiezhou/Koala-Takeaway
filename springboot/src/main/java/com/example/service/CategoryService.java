@@ -8,6 +8,7 @@ import com.example.mapper.CategoryMapper;
 import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import jdk.nashorn.internal.parser.Token;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,21 +25,53 @@ public class CategoryService {
     @Resource
     CategoryMapper categoryMapper;
 
+    @Resource
+    BusinessService businessService;
+
+    /**
+     * add
+     * @param category
+     */
     public void add(Category category) {
+        //check business auth
+        businessService.checkBusinessAuth();
+        Account currentUser = TokenUtils.getCurrentUser();
+        //if current is business, set default businessID
+        if (currentUser.getRole().equals(RoleEnum.BUSINESS.name())){
+            category.setBusinessId(currentUser.getId());
+        }
         categoryMapper.insert(category);
     }
 
+    /**
+     * deleteById
+     * @param id
+     */
     public void deleteById(Integer id) {
+        //check business auth
+        businessService.checkBusinessAuth();
         categoryMapper.deleteById(id);
     }
 
+    /**
+     * deletebatch
+     * @param ids
+     */
     public void deleteBatch(List<Integer> ids) {
+        //check business auth
+        businessService.checkBusinessAuth();
         for (Integer id: ids){
             categoryMapper.deleteById(id);
         }
     }
 
+    /**
+     * updateById
+     * @param category
+     */
     public void updateById(Category category) {
+        //check business auth
+        businessService.checkBusinessAuth();
         categoryMapper.updateById(category);
     }
 

@@ -11,10 +11,11 @@ public enum ResultCodeEnum {
     SYSTEM_ERROR("500", "system error"),
     USER_EXIST_ERROR("5001", "user already exist"),
     USER_NOT_LOGIN("5002", "user doesn't login"),
-    USER_ACCOUNT_ERROR("5003", "username or password wrong"),
-    USER_NOT_EXIST_ERROR("5004", "user not exist"),
-    PARAM_PASSWORD_ERROR("5005", "password wrong"),
-    USER_ROLE_ERROR("5006", "user role inconsistent"),
+    USER_ACCOUNT_ERROR("5002", "username or password wrong"),
+    USER_NOT_EXIST_ERROR("5003", "user not exist"),
+    PARAM_PASSWORD_ERROR("5004", "password wrong"),
+    USER_ROLE_ERROR("5005", "user role inconsistent"),
+    NO_AUTH("5006", "no authentication")
     ;
 
     public String code;

@@ -12,6 +12,7 @@ import com.example.mapper.BusinessMapper;
 import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.catalina.util.CustomObjectInputStream;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -183,5 +184,21 @@ public class BusinessService {
         }
         dbBusiness.setPassword(account.getNewPassword());
         businessMapper.updateById(dbBusiness);
+    }
+
+    /**
+     * check auth
+     */
+    public void checkBusinessAuth(){
+        Account currentUser = TokenUtils.getCurrentUser();
+        //if BUSINESS
+        if (currentUser.getRole().equals(RoleEnum.BUSINESS.name())){
+            //get current business
+            Business business = this.selectById(currentUser.getId());
+            //check if status not equals to pass -> no authen to crud
+            if (!business.getStatus().equals("pass")){
+                throw new CustomException(ResultCodeEnum.NO_AUTH);
+            }
+        }
     }
 }
