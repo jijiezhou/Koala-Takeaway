@@ -68,9 +68,9 @@ public class JwtInterceptor implements HandlerInterceptor {
             throw new CustomException(ResultCodeEnum.USER_NOT_EXIST_ERROR);
         }
         try {
-            // 用户密码加签验证 token
+            // User password signature verification token
             JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(account.getPassword())).build();
-            jwtVerifier.verify(token); // 验证token
+            jwtVerifier.verify(token); // token validation
         } catch (JWTVerificationException e) {
             throw new CustomException(ResultCodeEnum.TOKEN_CHECK_ERROR);
         }
