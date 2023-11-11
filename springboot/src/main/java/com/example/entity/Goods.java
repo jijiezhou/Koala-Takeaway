@@ -35,8 +35,28 @@ public class Goods {
     /** category ID */
     private Integer categoryId;
 
+    private String businessName;
+
+    private String categoryName;
+
     public Integer getId() {
         return id;
+    }
+
+    public String getBusinessName() {
+        return businessName;
+    }
+
+    public void setBusinessName(String businessName) {
+        this.businessName = businessName;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public void setId(Integer id) {
