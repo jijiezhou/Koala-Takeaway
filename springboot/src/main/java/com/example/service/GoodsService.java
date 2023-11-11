@@ -5,6 +5,7 @@ import com.example.entity.Goods;
 import com.example.mapper.GoodsMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
  * @Author zjj
  * @Date 11/10/23 10:05PM
  */
+@Service
 public class GoodsService {
     @Resource
     GoodsMapper goodsMapper;

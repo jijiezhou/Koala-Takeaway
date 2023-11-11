@@ -15,6 +15,8 @@ import java.util.List;
  * @Author zjj
  * @Date 11/10/23 10:00PM
  */
+@RestController
+@RequestMapping("/goods")
 public class GoodsController {
     @Resource
     private GoodsService goodsService;

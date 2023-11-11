@@ -3,7 +3,7 @@
     <!--  Header  -->
     <div class="manager-header">
       <div class="manager-header-left">
-        <img src="@/assets/imgs/logo.png" />
+        <img src="@/assets/imgs/logo.png"/>
         <div class="title">Takeaway Sys</div>
       </div>
 
@@ -17,8 +17,8 @@
       <div class="manager-header-right">
         <el-dropdown placement="bottom">
           <div class="avatar">
-            <img :src="user.avatar || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'" />
-            <div>{{ user.name ||  'Admin' }}</div>
+            <img :src="user.avatar || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'"/>
+            <div>{{ user.name || 'Admin' }}</div>
           </div>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="goToPerson">Personal Info</el-dropdown-item>
@@ -42,8 +42,9 @@
             <template slot="title">
               <i class="el-icon-menu"></i><span>Info Management</span>
             </template>
-            <el-menu-item index="/notice" v-if="user.role === 'ADMIN'">Notice Information</el-menu-item>
             <el-menu-item index="/category">Category Information</el-menu-item>
+            <el-menu-item index="/goods">Goods Information</el-menu-item>
+            <el-menu-item index="/notice" v-if="user.role === 'ADMIN'">Notice Information</el-menu-item>
           </el-submenu>
 
           <el-submenu index="user" v-if="user.role === 'ADMIN'">
@@ -60,7 +61,7 @@
 
       <!--  Data Table  -->
       <div class="manager-main-right">
-        <router-view @update:user="updateUser" />
+        <router-view @update:user="updateUser"/>
       </div>
     </div>
 
@@ -88,7 +89,7 @@ export default {
     goToPerson() {
       if (this.user.role === 'ADMIN') {
         this.$router.push('/adminPerson')
-      }else if (this.user.role === 'BUSINESS') {
+      } else if (this.user.role === 'BUSINESS') {
         this.$router.push('/businessPerson')
       }
     },
