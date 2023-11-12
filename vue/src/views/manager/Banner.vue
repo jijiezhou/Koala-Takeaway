@@ -81,8 +81,6 @@ export default {
       tableData: [],  // all data
       pageNum: 1,   // current page
       pageSize: 10,  // number of items each page
-      categoryList: [],
-      businessList: [],
       total: 0,
       businessName: null,
       fromVisible: false,
