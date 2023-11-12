@@ -44,6 +44,7 @@
             </template>
             <el-menu-item index="/category">Category Information</el-menu-item>
             <el-menu-item index="/goods">Goods Information</el-menu-item>
+            <el-menu-item index="/banner">Banner Information</el-menu-item>
             <el-menu-item index="/notice" v-if="user.role === 'ADMIN'">Notice Information</el-menu-item>
           </el-submenu>
 
@@ -54,7 +55,6 @@
             <el-menu-item index="/admin">Admin Info</el-menu-item>
             <el-menu-item index="/business">Business Info</el-menu-item>
             <el-menu-item index="/user">User Info</el-menu-item>
-
           </el-submenu>
         </el-menu>
       </div>

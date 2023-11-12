@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="search">
-      <el-input placeholder="please enter name" style="width: 200px; margin-left: 10px" v-model="name"></el-input>
+      <el-input placeholder="please enter name" style="width: 200px; margin-left: 10px" v-model="businessName"></el-input>
       <el-button type="info" plain style="margin-left: 10px" @click="load(1)">Query</el-button>
       <el-button type="warning" plain style="margin-left: 10px" @click="reset">Reset</el-button>
     </div>
@@ -15,9 +15,6 @@
       <el-table :data="tableData" strip @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" align="center"></el-table-column>
         <el-table-column prop="id" label="id" width="70" align="center" sortable></el-table-column>
-        <el-table-column prop="name" label="name"></el-table-column>
-        <el-table-column prop="price" label="price"></el-table-column>
-        <el-table-column prop="discount" label="discount"></el-table-column>
         <el-table-column prop="img" label="image">
           <template v-slot="scope">
             <div style="display: flex; align-items: center">
@@ -26,19 +23,8 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="descr" label="description"></el-table-column>
-        <el-table-column prop="origin" label="origin"></el-table-column>
-        <el-table-column prop="taste" label="taste"></el-table-column>
-        <el-table-column prop="specs" label="specific"></el-table-column>
-        <el-table-column prop="date" label="date"></el-table-column>
-        <el-table-column prop="status" label="status">
-          <template v-slot="scope">
-            <el-tag type="success" v-if="scope.row.status === 'available'">open</el-tag>
-            <el-tag type="warning" v-if="scope.row.status === 'unavailable'">close</el-tag>
-          </template>
-        </el-table-column>
-        <el-table-column prop="businessName" label="busiNname"></el-table-column>
-        <el-table-column prop="categoryName" label="cateName"></el-table-column>
+        <el-table-column prop="businessId" label="businessId"></el-table-column>
+        <el-table-column prop="businessName" label="businessName"></el-table-column>
         <el-table-column label="operation" align="center" width="180">
           <template v-slot="scope">
             <el-button size="mini" type="primary" plain @click="handleEdit(scope.row)">Edit</el-button>
@@ -62,15 +48,6 @@
 
     <el-dialog title="Business Form" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
       <el-form :model="form" label-width="100px" style="padding-right: 50px" :rules="rules" ref="formRef">
-        <el-form-item label="name" prop="name">
-          <el-input v-model="form.name" placeholder="name"></el-input>
-        </el-form-item>
-        <el-form-item label="price" prop="price">
-          <el-input v-model="form.price" placeholder="price"></el-input>
-        </el-form-item>
-        <el-form-item label="discount" prop="discount">
-          <el-input v-model="form.discount" placeholder="discount: 1 stands for no discount，use float"></el-input>
-        </el-form-item>
         <el-form-item label="image" prop="img">
           <el-upload
               :action="$baseUrl + '/files/upload'"
@@ -80,32 +57,9 @@
             <el-button type="primary">Upload</el-button>
           </el-upload>
         </el-form-item>
-        <el-form-item label="description" prop="descr">
-          <el-input v-model="form.descr" placeholder="description"></el-input>
-        </el-form-item>
-        <el-form-item label="origin" prop="origin">
-          <el-input v-model="form.origin" placeholder="original material"></el-input>
-        </el-form-item>
-        <el-form-item label="taste" prop="taste">
-          <el-input v-model="form.taste" placeholder="taste"></el-input>
-        </el-form-item>
-        <el-form-item label="specification" prop="specs">
-          <el-input v-model="form.specs" placeholder="specification"></el-input>
-        </el-form-item>
-        <el-form-item label="date" prop="date">
-          <el-date-picker format="yyyy-MM-dd" value-format="yyyy-MM-dd"
-                          v-model="form.date" style="width: 100%"></el-date-picker>
-        </el-form-item>
-        <el-form-item label="status" prop="status">
-          <el-radio-group v-model="form.status">
-            <el-radio label="available"></el-radio>
-            <el-radio label="unavailable"></el-radio>
-          </el-radio-group>
-        </el-form-item>
-
-        <el-form-item label="category" prop="categoryId">
-          <el-select style="width: 100%" v-model="form.categoryId">
-            <el-option v-for="item in categoryList" :key="item.id" :value="item.id" :label="item.name"></el-option>
+        <el-form-item label="businessId" prop="businessId">
+          <el-select style="width: 100%" v-model="form.businessId">
+            <el-option v-for="item in businessList" :key="item.id" :value="item.id" :label="item.name"></el-option>
           </el-select>
         </el-form-item>
       </el-form>
@@ -121,15 +75,16 @@
 
 <script>
 export default {
-  name: "Goods",
+  name: "Banner",
   data() {
     return {
       tableData: [],  // all data
       pageNum: 1,   // current page
       pageSize: 10,  // number of items each page
       categoryList: [],
+      businessList: [],
       total: 0,
-      name: null,
+      businessName: null,
       fromVisible: false,
       form: {},
       user: JSON.parse(localStorage.getItem('xm-user') || '{}'),
@@ -137,22 +92,18 @@ export default {
         name: [
           {required: true, message: 'please enter name', trigger: 'blur'},
         ],
-        price: [
-          {required: true, message: 'please enter price', trigger: 'blur'},
-        ],
       },
       ids: []
     }
   },
   created() {
     this.load(1)
-    let businessId = this.user.role === 'ADMIN' ? null : this.user.id
-    this.$request.get('category/selectAll', {
+    this.$request.get('/business/selectAll', {
       params: {
-        businessId: businessId
+        status: 'pass'
       }
     }).then(res => {
-      this.categoryList = res.data
+      this.businessList = res.data
     })
   },
   methods: {
@@ -171,7 +122,7 @@ export default {
       this.$refs.formRef.validate((valid) => {
         if (valid) {
           this.$request({
-            url: this.form.id ? '/goods/update' : '/goods/add',
+            url: this.form.id ? '/banner/update' : '/banner/add',
             method: this.form.id ? 'PUT' : 'POST',
             data: this.form
           }).then(res => {
@@ -189,7 +140,7 @@ export default {
     //deleteById
     del(id) {
       this.$confirm('Are you sure to delete？', 'Confirm delete', {type: "warning"}).then(response => {
-        this.$request.delete('/goods/delete/' + id).then(res => {
+        this.$request.delete('/banner/delete/' + id).then(res => {
           //delete success
           if (res.code === '200') {
             this.$message.success('delete success')
@@ -212,7 +163,7 @@ export default {
         return
       }
       this.$confirm('Are you sure to delete by batch?', 'Confirm delete', {type: "warning"}).then(response => {
-        this.$request.delete('/goods/delete/batch', {data: this.ids}).then(res => {
+        this.$request.delete('/banner/delete/batch', {data: this.ids}).then(res => {
           //delete success
           if (res.code === '200') {
             this.$message.success('delete success')
@@ -227,12 +178,11 @@ export default {
     //pagination
     load(pageNum) {
       if (pageNum) this.pageNum = pageNum
-      this.$request.get('/goods/selectPage', {
+      this.$request.get('/banner/selectPage', {
         params: {
           pageNum: this.pageNum,
           pageSize: this.pageSize,
-          username: this.username,
-          name: this.name
+          businessName: this.businessName
         }
       }).then(res => {
         this.tableData = res.data?.list
@@ -240,8 +190,7 @@ export default {
       })
     },
     reset() {
-      this.username = null
-      this.name = null
+      this.businessName = null
       this.load(1)
     },
     handleCurrentChange(pageNum) {

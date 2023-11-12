@@ -1,10 +1,7 @@
 package com.example.controller;
 
-import cn.hutool.core.util.ObjectUtil;
 import com.example.common.Result;
-import com.example.common.enums.ResultCodeEnum;
 import com.example.entity.Banner;
-import com.example.exception.CustomException;
 import com.example.service.BannerService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +13,7 @@ import java.util.List;
  * @Classname BannerController
  * @Description TODO
  * @Author zjj
- * @Date 11/11/23 4:50 PM
+ * @Date 11/11/23 4:50PM
  */
 @RestController
 @RequestMapping("/banner")

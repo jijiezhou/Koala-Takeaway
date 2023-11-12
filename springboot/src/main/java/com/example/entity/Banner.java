@@ -7,15 +7,33 @@ package com.example.entity;
  * @Date 11/11/23 4:50PM
  */
 public class Banner {
-    /** ID */
+    /**
+     * ID
+     */
     private Integer id;
-    /** image */
+    /**
+     * image
+     */
     private String img;
-    /** businessID */
+    /**
+     * businessID
+     */
     private Integer businessId;
+    /**
+     *businessName
+     */
+    private String businessName;
 
     public Integer getId() {
         return id;
+    }
+
+    public String getBusinessName() {
+        return businessName;
+    }
+
+    public void setBusinessName(String businessName) {
+        this.businessName = businessName;
     }
 
     public void setId(Integer id) {
