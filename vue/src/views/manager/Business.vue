@@ -271,7 +271,7 @@ export default {
       // Change the avatar attribute to the link of the uploaded image
       this.form.license = response.data
     }
-  }//test
+  }
 }
 </script>
 
