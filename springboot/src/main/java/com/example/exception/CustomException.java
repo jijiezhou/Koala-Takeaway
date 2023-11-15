@@ -4,7 +4,7 @@ import com.example.common.enums.ResultCodeEnum;
 
 public class CustomException extends RuntimeException {
     private String code;
-    private String msg;
+    private String msg; //test
 
     public CustomException(ResultCodeEnum resultCodeEnum) {
         this.code = resultCodeEnum.code;
