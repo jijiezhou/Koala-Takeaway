@@ -3,7 +3,7 @@ package com.example.exception;
 import com.example.common.enums.ResultCodeEnum;
 
 public class CustomException extends RuntimeException {
-    private String code; //test
+    private String code;
     private String msg;
 
     public CustomException(ResultCodeEnum resultCodeEnum) {
