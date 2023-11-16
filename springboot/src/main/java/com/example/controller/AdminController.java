@@ -83,5 +83,4 @@ public class AdminController {
         PageInfo<Admin> page = adminService.selectPage(admin, pageNum, pageSize);
         return Result.success(page);
     }
-    //test
 }
