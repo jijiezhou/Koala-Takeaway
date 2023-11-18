@@ -14,7 +14,7 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/admin")
-public class AdminController {//test
+public class AdminController {
 
     @Resource
     private AdminService adminService;
