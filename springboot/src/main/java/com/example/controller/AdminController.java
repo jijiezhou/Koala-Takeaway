@@ -27,6 +27,7 @@ public class AdminController {
         adminService.add(admin);
         return Result.success();
     }
+    //test
 
     /**
      * Delete
