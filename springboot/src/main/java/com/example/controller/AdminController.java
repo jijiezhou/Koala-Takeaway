@@ -36,7 +36,7 @@ public class AdminController {
         adminService.deleteById(id);
         return Result.success();
     }
-
+    //test
     /**
      * Delete By Batch
      */
