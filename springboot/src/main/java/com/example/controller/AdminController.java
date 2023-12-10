@@ -45,7 +45,7 @@ public class AdminController {
         adminService.deleteBatch(ids);
         return Result.success();
     }
-
+    //test
     /**
      * Update
      */
