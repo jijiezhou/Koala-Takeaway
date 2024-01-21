@@ -48,7 +48,7 @@ public class WebController {
         return Result.success(account);//test
     }
 
-    //1.19
+    //1.20
 
     /**
      * Register
